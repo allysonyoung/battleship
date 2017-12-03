@@ -3,7 +3,9 @@ defmodule BattleshipWeb.UserSocket do
 
   ## Channels
   # channel "room:*", BattleshipWeb.RoomChannel
-
+  channel "game:*", BattleshipWeb.GameChannel
+  channel "player:*", BattleshipWeb.PlayerChannel
+  
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
   # transport :longpoll, Phoenix.Transports.LongPoll

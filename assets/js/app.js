@@ -18,4 +18,28 @@ import "phoenix_html"
 // Local files can be imported directly using relative
 // paths "./socket" or full ones "web/static/js/socket".
 
-// import socket from "./socket"
+import socket from "./socket"
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Chat from './components/Chat'
+import Game from './components/Game';
+
+ReactDOM.render(<Game />, document.getElementById('game'));
+// function ready(channel, state) {
+//   let chat = document.getElementById('chat');
+//   let game = document.getElementById('game');
+//   ReactDOM.render(<Game state={state} channel={channel} />, game);
+//   ReactDOM.render(<Chat state={state} channel={channel} />, chat);
+// }
+//
+// function start() {
+//   let channel = socket.channel("game:" + window.user_name, {});
+//   channel.join()
+//     .receive("ok", state0 => {
+//       console.log("Joined successfully", state0);
+//       ready(channel, state0);
+//     })
+//     .receive("error", resp => { console.log("Unable to join", resp); });
+// }
+//
+// $(start);
