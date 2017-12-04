@@ -7,11 +7,32 @@ export default class Chat extends React.Component {
     super(props)
   }
 
+  handleSubmit(e) {
+    e.preventDefault();
+  }
+
   render() {
+    const containerStyle = {
+      'backgroundColor': '#eee'
+    }
+
+    const titleStyle = {
+      'backgroundColor': 'grey',
+      'color': 'white',
+      'textAlign': 'center'
+    }
     return (
-      <div>
-        <h2>Chat</h2>
-        <MessageList />
+      <div style={containerStyle}>
+        <h2 style={titleStyle}>CHAT</h2>
+        <div>
+
+        </div>
+        <div>
+          <form onSubmit={this.handleSubmit}>
+            <textarea placeholder="Type a message..."/>
+          </form>
+          <input type="submit" value="Submit" />
+        </div>
       </div>
     )
   }

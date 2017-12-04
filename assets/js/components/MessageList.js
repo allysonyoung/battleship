@@ -9,7 +9,7 @@ export default class MessageList extends React.Component {
   render() {
     return (
       <div>
-        <p>Message List</p>
+        
       </div>
     )
   }

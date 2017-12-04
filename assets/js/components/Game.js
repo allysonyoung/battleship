@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Grid from './Grid';
+import Grid from './Grid.js';
 
 export default class Game extends React.Component {
   constructor(props) {
@@ -10,8 +10,7 @@ export default class Game extends React.Component {
   render() {
     const styles = {
       'display': 'flex',
-      'flexDirection': 'row',
-      'justifyContent': 'space-around'
+      'flexDirection': 'row'
     }
     return(
       <div style={styles}>

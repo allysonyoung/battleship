@@ -1,6 +1,6 @@
 defmodule Battleship.Game do
 
-  def client_view() do
+  def new do
     
   end
 end

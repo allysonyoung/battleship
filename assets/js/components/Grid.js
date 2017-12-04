@@ -10,6 +10,10 @@ export default class Grid extends React.Component {
   }
 
   render() {
+    const styles = {
+      'margin': '20px'
+    }
+
     var grid = [];
     var gridRows = [];
     for (var x = 0; x < 10; x++) {
@@ -23,7 +27,7 @@ export default class Grid extends React.Component {
     }
 
     return (
-      <div>
+      <div className="board" style={styles}>
         <div>
           {gridRows}
         </div>

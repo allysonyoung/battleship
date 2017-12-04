@@ -23,23 +23,35 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Chat from './components/Chat'
 import Game from './components/Game';
+import Form from './components/Form.js';
+window.user_name = "allyson";
+window.table_name = "game";
+// ReactDOM.render(<Game />, document.getElementById('game'));
+// ReactDOM.render(<Chat />, document.getElementById('chat'));
 
-ReactDOM.render(<Game />, document.getElementById('game'));
-// function ready(channel, state) {
-//   let chat = document.getElementById('chat');
-//   let game = document.getElementById('game');
-//   ReactDOM.render(<Game state={state} channel={channel} />, game);
-//   ReactDOM.render(<Chat state={state} channel={channel} />, chat);
+// if (!(window.user_name && window.table_name)) {
+//   ReactDOM.render(<Form />, document.getElementById('form'));
 // }
-//
-// function start() {
-//   let channel = socket.channel("game:" + window.user_name, {});
-//   channel.join()
-//     .receive("ok", state0 => {
-//       console.log("Joined successfully", state0);
-//       ready(channel, state0);
-//     })
-//     .receive("error", resp => { console.log("Unable to join", resp); });
-// }
-//
-// $(start);
+
+function ready(channel, state) {
+  let chat = document.getElementById('chat');
+  let game = document.getElementById('game');
+  ReactDOM.render(<Game state={state} channel={channel} />, game);
+  ReactDOM.render(<Chat state={state} channel={channel} />, chat);
+}
+
+function start() {
+  if (window.table_name) {
+    let channel = socket.channel("game:" + window.table_name, {});
+    console.log(channel)
+    channel.join()
+      .receive("ok", state0 => {
+        console.log("Joined successfully", state0);
+        ready(channel, state0);
+      })
+      .receive("error", resp => { console.log("Unable to join", resp);
+    });
+  }
+}
+
+$(start);

@@ -1,7 +1,7 @@
 defmodule BattleshipWeb.PlayerChannel do
   use BattleshipWeb, :channel
 
-  def join("player:" <> code, payload, socket) do
+  def join("player:lobby", payload, socket) do
     if authorized?(payload) do
       {:ok, socket}
     else
