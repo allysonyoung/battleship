@@ -4,16 +4,18 @@ defmodule BattleshipWeb.GameChannel do
   alias Battleship.Game
   alias Battleship.Chat
 
-  def join("game:" <> table_name, payload, socket) do
-    if authorized?(socket, table_name) do
-      game = GameAgent.get(table_name) || Game.new()
-      GameAgent.put(table_name, game)
-      socket = socket
-      |> assign(:table_name, game)
-      {:ok, game, socket}
-    else
-      {:error, %{reason: "unauthorized"}}
-    end
+  def join("player:" <> user_name, _payload, socket) do
+    session = Session.new()
+    socket = socket
+    |> assign(:session, session)
+    |> assign(:user_name, user_name)
+  end
+
+  def join("game:" <> game_code, _payload, socket) do
+    game = Game.new()
+    socket = socket
+    |> assign(:game, game)
+    {:ok, game, socket}
   end
 
   # Channels can be used in a request/response fashion

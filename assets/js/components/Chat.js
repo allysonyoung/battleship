@@ -4,7 +4,8 @@ import MessageList from './MessageList';
 
 export default class Chat extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
+    // this.props.channel.on("new_msg", )
   }
 
   handleSubmit(e) {

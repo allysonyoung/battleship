@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -8,40 +8,15 @@
     <meta name="author" content="">
 
     <title>Hello Battleship!</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
   </head>
 
   <body>
-    <h1 class="text-center">BATTLESHIP</h1>
-    <%= if @user_name && @table_name do %>
-      <h3>Welcome <%= @user_name %></h3>
-      <h4>Game: <%= @table_name %></h4>
-      <div id="container" style="display: flex;">
-        <div id="game"></div>
-        <div id="chat" style="flex-grow: 1; margin: 10px;"></div>
-      </div>
-    <% else %>
-      <div id="form">
-        <%= form_for @conn, page_path(@conn, :name), fn f -> %>
-          <label>
-            Set Name: <%= text_input f, :name %>
-          </label>
-          <label>
-            Enter Game Code: <%= text_input f, :table %>
-          </label>
-          <%= submit "Start" %>
-         <% end %>
-      </div>
-    <% end %>
-
-    <%= if @user_token do %>
-      <script>
-        window.user_name = "<%= @user_name %>";
-        window.user_token = "<%= @user_token %>";
-        window.table_name = "<%= @table_name %>";
-      </script>
-    <% end %>
+    <h1 class="text-center" style="background-color:#eee; font-weight:bold; padding: 20px; font-size: 50px;">BATTLESHIP</h1>
+    <main role="main">
+      <%= render @view_module, @view_template, assigns %>
+    </main>
 
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>

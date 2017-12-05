@@ -1,57 +1,37 @@
-// Brunch automatically concatenates all files in your
-// watched paths. Those paths can be configured at
-// config.paths.watched in "brunch-config.js".
-//
-// However, those files will only be executed if
-// explicitly imported. The only exception are files
-// in vendor, which are never wrapped in imports and
-// therefore are always executed.
-
-// Import dependencies
-//
-// If you no longer want to use a dependency, remember
-// to also remove its path from "config.paths.watched".
 import "phoenix_html"
-
-// Import local files
-//
-// Local files can be imported directly using relative
-// paths "./socket" or full ones "web/static/js/socket".
-
 import socket from "./socket"
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Chat from './components/Chat'
+import Chat from './components/Chat.js'
 import Game from './components/Game';
 import Form from './components/Form.js';
-window.user_name = "allyson";
-window.table_name = "game";
-// ReactDOM.render(<Game />, document.getElementById('game'));
-// ReactDOM.render(<Chat />, document.getElementById('chat'));
 
-// if (!(window.user_name && window.table_name)) {
-//   ReactDOM.render(<Form />, document.getElementById('form'));
-// }
-
-function ready(channel, state) {
-  let chat = document.getElementById('chat');
-  let game = document.getElementById('game');
-  ReactDOM.render(<Game state={state} channel={channel} />, game);
-  ReactDOM.render(<Chat state={state} channel={channel} />, chat);
+function ready(chat, game) {
+  let game_code = 'GAMECODE';
+  let channel = socket.channel("game:" + game_code, {});
+  channel.join()
+    .receive("ok", state0 => {
+      console.log("Joined successfully", state0);
+      ReactDOM.render(<Game channel={channel} state={state0}/>, game);
+      ReactDOM.render(<Chat channel={channel} state={state0}/>, chat);
+    })
+    .receive("error", resp => {
+      console.log("Unable to join", resp);
+    })
 }
 
 function start() {
-  if (window.table_name) {
-    let channel = socket.channel("game:" + window.table_name, {});
-    console.log(channel)
-    channel.join()
-      .receive("ok", state0 => {
-        console.log("Joined successfully", state0);
-        ready(channel, state0);
-      })
-      .receive("error", resp => { console.log("Unable to join", resp);
-    });
+  let chat = document.getElementById('chat');
+  let game = document.getElementById('game');
+  let startButton = document.getElementById('start-button');
+  const styles = {
+    'fontSize': '20px',
+    'marginTop': '15px',
+    'width': '100%'
   }
+  let html = <button className="btn btn-primary" style={styles} onClick={ready(chat, game)}>Start</button>;
+  console.log(window.user_name)
+  ReactDOM.render(html, startButton);
 }
 
 $(start);

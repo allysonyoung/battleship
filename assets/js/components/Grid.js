@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Cell from './Cell';
+import Cell from './Cell.js';
 
 export default class Grid extends React.Component {
   square() {
@@ -11,6 +11,7 @@ export default class Grid extends React.Component {
 
   render() {
     const styles = {
+      'border': 'solid 2px #3cc3da',
       'margin': '20px'
     }
 
@@ -23,7 +24,7 @@ export default class Grid extends React.Component {
         let key = `${x}, ${y}`;
         gridCells.push(<Cell key={key} id={key} width='40px' height='40px' color='grey' />);
       }
-      gridRows.push(<div className="grid-rows" key={rowKey}>{gridCells}</div>);
+      gridRows.push(<div className="grid-row" key={rowKey}>{gridCells}</div>);
     }
 
     return (
