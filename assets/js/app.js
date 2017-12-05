@@ -2,13 +2,13 @@ import "phoenix_html"
 import socket from "./socket"
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Chat from './components/Chat.js'
+import Chat from './components/Chat'
 import Game from './components/Game';
 import Form from './components/Form.js';
 
 function ready(chat, game) {
   let game_code = 'GAMECODE';
-  let channel = socket.channel("game:" + game_code, {});
+  let channel = socket.channel("game:" + window.table_name, {});
   channel.join()
     .receive("ok", state0 => {
       console.log("Joined successfully", state0);
@@ -31,6 +31,7 @@ function start() {
   }
   let html = <button className="btn btn-primary" style={styles} onClick={ready(chat, game)}>Start</button>;
   console.log(window.user_name)
+  console.log(window.table_name)
   ReactDOM.render(html, startButton);
 }
 

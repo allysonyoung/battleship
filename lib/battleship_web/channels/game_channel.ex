@@ -4,13 +4,6 @@ defmodule BattleshipWeb.GameChannel do
   alias Battleship.Game
   alias Battleship.Chat
 
-  def join("player:" <> user_name, _payload, socket) do
-    session = Session.new()
-    socket = socket
-    |> assign(:session, session)
-    |> assign(:user_name, user_name)
-  end
-
   def join("game:" <> game_code, _payload, socket) do
     game = Game.new()
     socket = socket
