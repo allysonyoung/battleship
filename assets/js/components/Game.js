@@ -12,14 +12,18 @@ export default class Game extends React.Component {
       'display': 'flex',
       'flexDirection': 'row'
     }
+
+    const textStyle = {
+      'marginLeft': '20px'
+    }
     return(
       <div style={styles}>
         <div className="game-board">
-          <h1>Opponent</h1>
+          <h1 style={textStyle}>Opponent</h1>
           <Grid />
         </div>
         <div className="game-board">
-          <h1>You</h1>
+          <h1 style={textStyle}>You</h1>
           <Grid />
         </div>
       </div>

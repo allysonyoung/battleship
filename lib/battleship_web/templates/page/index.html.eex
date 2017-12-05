@@ -1,5 +1,6 @@
 <%= if @user_name do %>
   <h3 class="text-center">Welcome <%= @user_name %>!</h3>
+  <p class="text-center">Place 5 ships of sizes [5, 4, 3, 3, 2] on your board.</p>
   <div id="container" style="display: flex;">
     <div id="game"></div>
     <div id="chat" style="flex-grow: 1; margin: 64px 10px 10px;"></div>

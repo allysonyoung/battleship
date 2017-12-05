@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import MessageList from './MessageList';
+import MessageList from './MessageList.js';
 
 export default class Chat extends React.Component {
   constructor(props) {
@@ -14,7 +14,8 @@ export default class Chat extends React.Component {
 
   render() {
     const containerStyle = {
-      'backgroundColor': '#eee'
+      'backgroundColor': '#eee',
+      'height': '403px'
     }
 
     const titleStyle = {
@@ -22,17 +23,34 @@ export default class Chat extends React.Component {
       'color': 'white',
       'textAlign': 'center'
     }
+    const formWrapperStyles = {
+      'display': 'flex',
+      'height': '88%'
+    }
+
+    const formStyles = {
+      'alignSelf': 'flex-end',
+      'display': 'flex',
+      'flexGrow': '1',
+      'height': '80px',
+      'justifyContent': 'flex-end'
+    }
+
+    const textStyle = {
+      'width': '100%'
+    }
+
     return (
       <div style={containerStyle}>
         <h2 style={titleStyle}>CHAT</h2>
         <div>
 
         </div>
-        <div>
-          <form onSubmit={this.handleSubmit}>
-            <textarea placeholder="Type a message..."/>
+        <div style={formWrapperStyles}>
+          <form style={formStyles} onSubmit={this.handleSubmit}>
+            <textarea style={textStyle} placeholder="Type a message..."/>
+            <input type="submit" value="Submit" />
           </form>
-          <input type="submit" value="Submit" />
         </div>
       </div>
     )
