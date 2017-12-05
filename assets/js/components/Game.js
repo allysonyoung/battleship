@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Grid from './Grid.js';
+import Grid from './Grid';
 
 export default class Game extends React.Component {
   constructor(props) {

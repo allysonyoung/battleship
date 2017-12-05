@@ -1,36 +1,26 @@
-<div class="jumbotron">
-  <h2><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h2>
-  <p class="lead">A productive web framework that<br />does not compromise speed and maintainability.</p>
-</div>
-
-<div class="row marketing">
-  <div class="col-lg-6">
-    <h4>Resources</h4>
-    <ul>
-      <li>
-        <a href="http://phoenixframework.org/docs/overview">Guides</a>
-      </li>
-      <li>
-        <a href="https://hexdocs.pm/phoenix">Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-    </ul>
+<%= if @user_name do %>
+  <h3 class="text-center">Welcome <%= @user_name %>!</h3>
+  <div id="container" style="display: flex;">
+    <div id="game"></div>
+    <div id="chat" style="flex-grow: 1; margin: 64px 10px 10px;"></div>
   </div>
-
-  <div class="col-lg-6">
-    <h4>Help</h4>
-    <ul>
-      <li>
-        <a href="http://groups.google.com/group/phoenix-talk">Mailing list</a>
-      </li>
-      <li>
-        <a href="http://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">@elixirphoenix</a>
-      </li>
-    </ul>
+<% else %>
+  <div id="form" style="border: solid 1px black; font-size: 25px; margin: 40px auto; padding: 30px; width: 400px;">
+    <%= form_for @conn, page_path(@conn, :set_names), fn f -> %>
+      <label>
+        Set Name: <%= text_input f, :name %>
+      </label>
+      <label>
+        Enter Game Code: <%= text_input f, :table %>
+      </label>
+      <div id="start-button" style="text-align: center;"></div>
+     <% end %>
   </div>
-</div>
+<% end %>
+
+<%= if @user_name do %>
+  <script>
+    window.user_name = "<%= @user_name %>";
+    window.table_name = "<%= @table_name %>";
+  </script>
+<% end %>

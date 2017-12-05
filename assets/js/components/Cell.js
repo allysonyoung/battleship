@@ -1,17 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const Cell = (props) => {
-  const styles = {
-    'backgroundColor': props.color,
-    'border': 'solid 1px black',
-    'height': props.height,
-    'width': props.width
+export default class Cell extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      color: '#207291'
+    }
+    this.handleClick = this.handleClick.bind(this);
   }
 
-  return (
-    <button coord={props.id} style={styles}></button>
-  )
-}
+  handleClick() {
+    this.setState({
+      color: 'black'
+    })
+  }
+  render() {
+    const styles = {
+      'backgroundColor': this.state.color,
+      'border': 'solid 1px #3cc3da',
+      'height': this.props.height,
+      'width': this.props.width
+    }
 
-export default Cell;
+    return (
+      <button coord={this.props.id} style={styles} onClick={this.handleClick}></button>
+    )
+  }
+}
